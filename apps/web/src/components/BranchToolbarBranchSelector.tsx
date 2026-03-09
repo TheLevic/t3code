@@ -126,9 +126,10 @@ export function BranchToolbarBranchSelector({
         ? branchPickerItems
         : branchPickerItems.filter((itemValue) => {
             if (createBranchItemValue && itemValue === createBranchItemValue) return true;
+            if (checkoutPullRequestItemValue && itemValue === checkoutPullRequestItemValue) return true;
             return itemValue.toLowerCase().includes(normalizedBranchQuery);
           }),
-    [branchPickerItems, createBranchItemValue, normalizedBranchQuery],
+    [branchPickerItems, checkoutPullRequestItemValue, createBranchItemValue, normalizedBranchQuery],
   );
   const [resolvedActiveBranch, setOptimisticBranch] = useOptimistic(
     canonicalActiveBranch,

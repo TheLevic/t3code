@@ -420,7 +420,7 @@ const makeGitCore = Effect.gen(function* () {
 
   const listRemoteNames = (cwd: string): Effect.Effect<ReadonlyArray<string>, GitCommandError> =>
     runGitStdout("GitCore.listRemoteNames", cwd, ["remote"]).pipe(
-      Effect.map((stdout) => parseRemoteNames(stdout).toReversed()),
+      Effect.map((stdout) => parseRemoteNames(stdout)),
     );
 
   const resolvePrimaryRemoteName = (cwd: string): Effect.Effect<string, GitCommandError> =>
