@@ -1928,7 +1928,7 @@ export default function ChatView({ threadId }: ChatViewProps) {
       const [entry] = entries;
       if (!entry) return;
 
-      const nextCompact = shouldUseCompactComposerFooter(entry.contentRect.width, {
+      const nextCompact = shouldUseCompactComposerFooter(composerForm.clientWidth, {
         hasWideActions: composerFooterHasWideActions,
       });
       setIsComposerFooterCompact((previous) => (previous === nextCompact ? previous : nextCompact));
