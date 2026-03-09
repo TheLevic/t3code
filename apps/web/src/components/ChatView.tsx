@@ -5723,6 +5723,15 @@ const ProviderModelPicker = memo(function ProviderModelPicker(props: {
   );
 });
 
+const REASONING_LABEL_BY_OPTION: Record<CodexReasoningEffort, string> = {
+  low: "Low",
+  medium: "Medium",
+  high: "High",
+  xhigh: "Extra High",
+};
+
+const DEFAULT_CODEX_REASONING_EFFORT = getDefaultReasoningEffort("codex");
+
 const CompactComposerControlsMenu = memo(function CompactComposerControlsMenu(props: {
   activePlan: boolean;
   interactionMode: ProviderInteractionMode;
@@ -5738,14 +5747,6 @@ const CompactComposerControlsMenu = memo(function CompactComposerControlsMenu(pr
   onTogglePlanSidebar: () => void;
   onToggleRuntimeMode: () => void;
 }) {
-  const defaultReasoningEffort = getDefaultReasoningEffort("codex");
-  const reasoningLabelByOption: Record<CodexReasoningEffort, string> = {
-    low: "Low",
-    medium: "Medium",
-    high: "High",
-    xhigh: "Extra High",
-  };
-
   return (
     <Menu>
       <MenuTrigger
@@ -5776,8 +5777,8 @@ const CompactComposerControlsMenu = memo(function CompactComposerControlsMenu(pr
               >
                 {props.reasoningOptions.map((effort) => (
                   <MenuRadioItem key={effort} value={effort}>
-                    {reasoningLabelByOption[effort]}
-                    {effort === defaultReasoningEffort ? " (default)" : ""}
+                    {REASONING_LABEL_BY_OPTION[effort]}
+                    {effort === DEFAULT_CODEX_REASONING_EFFORT ? " (default)" : ""}
                   </MenuRadioItem>
                 ))}
               </MenuRadioGroup>
@@ -5847,15 +5848,8 @@ const CodexTraitsPicker = memo(function CodexTraitsPicker(props: {
   onFastModeChange: (enabled: boolean) => void;
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const defaultReasoningEffort = getDefaultReasoningEffort("codex");
-  const reasoningLabelByOption: Record<CodexReasoningEffort, string> = {
-    low: "Low",
-    medium: "Medium",
-    high: "High",
-    xhigh: "Extra High",
-  };
   const triggerLabel = [
-    reasoningLabelByOption[props.effort],
+    REASONING_LABEL_BY_OPTION[props.effort],
     ...(props.fastModeEnabled ? ["Fast"] : []),
   ]
     .filter(Boolean)
@@ -5894,8 +5888,8 @@ const CodexTraitsPicker = memo(function CodexTraitsPicker(props: {
           >
             {props.options.map((effort) => (
               <MenuRadioItem key={effort} value={effort}>
-                {reasoningLabelByOption[effort]}
-                {effort === defaultReasoningEffort ? " (default)" : ""}
+                {REASONING_LABEL_BY_OPTION[effort]}
+                {effort === DEFAULT_CODEX_REASONING_EFFORT ? " (default)" : ""}
               </MenuRadioItem>
             ))}
           </MenuRadioGroup>
